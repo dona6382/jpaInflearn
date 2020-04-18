@@ -145,14 +145,15 @@ class MemberRepositoryTest {
 
     @Test
     public void returnType(){
-        Member m1 = new Member("AAA", 10);
         Member m2 = new Member("BBB", 20);
+        Member m1 = new Member("AAA", 10);
         memberRepository.save(m1);
         memberRepository.save(m2);
 
         List<Member> aaa = memberRepository.findListByUsername("AAA");
         Member aaaMember = memberRepository.findMemberByUsername("AAA");
         Optional<Member> aaaOPtional = memberRepository.findOptionalByUsername("AAA");
+
 
     }
 
