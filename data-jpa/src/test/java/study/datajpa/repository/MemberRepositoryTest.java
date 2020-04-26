@@ -6,10 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-<<<<<<< HEAD
-=======
-import org.springframework.data.domain.Slice;
->>>>>>> a1c366170e3c257db39ae5fbe7ad37b2b12aaa77
+
+
+
 import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.Rollback;
 import study.datajpa.dto.MemberDto;
@@ -161,28 +160,7 @@ class MemberRepositoryTest {
         Member aaaMember = memberRepository.findMemberByUsername("AAA");
         Optional<Member> aaaOPtional = memberRepository.findOptionalByUsername("AAA");
     }
-<<<<<<< HEAD
 
-    @Test
-    public void paging(){
-        // given
-        memberRepository.save(new Member("member1", 10));
-        memberRepository.save(new Member("member2", 10));
-        memberRepository.save(new Member("member3", 10));
-        memberRepository.save(new Member("member4", 10));
-        memberRepository.save(new Member("member5", 10));
-
-        int age = 3;
-        PageRequest pageRequest = PageRequest.of(0, 3, Sort.by(Sort.Direction.DESC, "username"));
-
-        //when
-        Page<Member> page = memberRepository.findByAge(age, pageRequest);
-        long totalCount = memberRepository.totalCount(age);
-
-        //then
-        assertThat(members.size()).isEqualTo(3);
-        assertThat(totalCount).isEqualTo(5);
-=======
 
     @Test
     public void paging(){
@@ -210,9 +188,25 @@ class MemberRepositoryTest {
         assertThat(page.getTotalPages()).isEqualTo(2);
         assertThat(page.isFirst()).isTrue();
         assertThat(page.hasNext()).isTrue();
->>>>>>> a1c366170e3c257db39ae5fbe7ad37b2b12aaa77
 
     }
 
+    @Test
+    public void blukUpdate(){
+        // given
+        memberRepository.save(new Member("member1", 10));
+        memberRepository.save(new Member("member2", 19));
+        memberRepository.save(new Member("member3", 20));
+        memberRepository.save(new Member("member4", 21));
+        memberRepository.save(new Member("member5", 40));
 
+        // when
+        int resultCount = memberRepository.blukAgePlus(20);
+
+        List<Member> result = memberRepository.findByUsername("member5");
+        Member member5 = result.get(0);
+
+        // then
+        assertThat(resultCount).isEqualTo(3);
+    }
 }
