@@ -42,7 +42,7 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     @Query(value = "select m from Member m left join m.team t")
     Page<Member> findByAge(int age, Pageable pageable);
 
-    @Modifying
+    @Modifying(clearAutomatically = true)
     @Query("update Member m set m.age = m.age + 1 where m.age >=:age")
     int blukAgePlus(@Param("age") int age);
 
