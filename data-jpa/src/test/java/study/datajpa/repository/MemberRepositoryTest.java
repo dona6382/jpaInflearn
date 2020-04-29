@@ -235,10 +235,11 @@ class MemberRepositoryTest {
         em.clear();
 
         // when
-        List<Member> members = memberRepository.findAll();
+        List<Member> members = memberRepository.findMemberFetchJoin();
 
         for(Member member : members){
             System.out.println("member = " + member.getUsername());
+            System.out.println("member.teamClass = " + member.getTeam().getClass());
             System.out.println("member = " + member.getTeam().getName());
         }
     }
